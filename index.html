@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descarga Segura</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f2f5;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        h2 { color: #333; }
+
+        #btnDescarga {
+            background-color: #28a745; /* Verde como tu app */
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        #btnDescarga:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        #contador {
+            font-weight: bold;
+            color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Tu descarga está casi lista</h2>
+    <p>Por favor, espera <span id="contador">10</span> segundos para la <strong>Descarga Segura</strong>.</p>
+    
+    <button id="btnDescarga" disabled>Esperando...</button>
+</div>
+
+<script>
+    let tiempo = 10;
+    const boton = document.getElementById('btnDescarga');
+    const displayContador = document.getElementById('contador');
+    
+    // Cambiá esta URL por tu link de GitHub
+    const urlGithub = "https://github.com/tu-usuario/tu-repositorio";
+
+    const cuentaRegresiva = setInterval(() => {
+        tiempo--;
+        displayContador.textContent = tiempo;
+
+        if (tiempo <= 0) {
+            clearInterval(cuentaRegresiva);
+            boton.disabled = false;
+            boton.textContent = "DESCARGA SEGURA";
+            displayContador.parentElement.innerHTML = "¡Archivo verificado con éxito!";
+            
+            // Acción al hacer clic
+            boton.onclick = () => {
+                window.location.href = urlGithub;
+            };
+        }
+    }, 1000);
+</script>
+
+</body>
+</html>
